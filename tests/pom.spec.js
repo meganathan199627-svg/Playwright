@@ -1,0 +1,25 @@
+import {test,expect} from '@playwright/test'
+import { LoginPage } from '../Page/LoginPage.js'
+import { DropdownPage } from '../Page/DropdownPage.js'
+test('POM',async({page})=>{
+    const login= new LoginPage(page)
+    const dropdown=new DropdownPage(page)
+    await login.visitUrl()
+    await login.enterUserName('mega2505')
+    await login.enterPassword('OVI2B4')
+    await login.clickLoginButton()
+    await dropdown.selectLocation({label:'London'})
+    // await expect(dropdown.location).toHaveValue('London')
+    await dropdown.selectHotel({label:'Hotel Sunshine'})
+    // const text  = await dropdown.hotels.locator(' option:checked').textContent()
+    // console.log('The Hotel name is',text)
+    await dropdown.selectRoom({label:'Super Deluxe'})
+    // const print =await dropdown.roomName()
+    // console.log('The Room Type is:',print)
+    await dropdown.noOfRooms({value:'1'})
+    await dropdown.selectDate('07/10/2026')
+    await dropdown.dropDate('10/10/2026')
+    await dropdown.noOfPersons({value:'2'})
+    await dropdown.noOfChild({value:'0'})
+    await page.waitForTimeout(9000)
+})
